@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <button type="submit" id="signup" class="g-recaptcha" data-sitekey='<%= siteKey %>'  onclick='onSubmit()' data-action='submit'>Generate reCaptcha</button>
+    <p id="printToken"></p>
+  <script src="https://www.google.com/recaptcha/api.js?render=<%= siteKey %>"></script>
+  <script>
+    function onSubmit(e) {
+        grecaptcha.ready(function() {
+          grecaptcha.execute('<%= siteKey %>', {action: 'submit'}).then(function(token) {
+            var paragraph = document.getElementById("printToken");
+            paragraph.textContent = token;
+          });
+        });
+      }
+  </script>
+  </body>
+</html>
